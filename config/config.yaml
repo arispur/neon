@@ -13,17 +13,16 @@ Pengembangan API ini menggunakan bahasa pemrograman **Python** serta framework *
 Deployment kedalam internal system menggunakan **Docker Engine** untuk menstandarisasikan pengelolaan asset.
   '
   servers:
-    - url: "http://192.168.109.153:8001"
+    - url: "http://localhost:8000"
       description: "localhost"
     - url: "http://127.0.0.1:8000"
       description: "local"
-      
+
 allowed_hosts:
   - "localhost"
   - "127.0.0.1"
   - "192.168.14.44"
   - "ocbcnisp.com"
-  - "192.168.109.153"
 
 allow_methods:
   - "GET"
@@ -36,8 +35,8 @@ database:
     host: "localhost"
     port: 5432
     username: "postgres"
-    password: "postgres"
-    db: "postgres"
+    password: "mysecretpassword"
+    db: "example1"
     schema: "public"
   staging:
     host: "localhost"
