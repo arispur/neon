@@ -9,7 +9,7 @@ from fastapi.openapi.docs import (
     get_swagger_ui_oauth2_redirect_html
 )
 PARAMS = Config.PARAMS
-from apps.routers import InformationRouter, LoanRouter, ArisRouter,LoanRouterFelix, AdetRouter
+from apps.routers import InformationRouter, LoanRouter, ArisRouter,LoanRouterFelix, AdetRouter,LoanRouterAjeng
 from fastapi.staticfiles import StaticFiles
 
 
@@ -78,5 +78,11 @@ app.include_router(
     LoanRouterFelix.router,
     tags=["Felix"],
     prefix="/felix",
+    dependencies=[Depends(verify_token)]
+)
+app.include_router(
+    LoanRouterAjeng.router,
+    tags=["Ajeng"],
+    prefix="/ajeng",
     dependencies=[Depends(verify_token)]
 )
