@@ -13,9 +13,9 @@ Pengembangan API ini menggunakan bahasa pemrograman **Python** serta framework *
 Deployment kedalam internal system menggunakan **Docker Engine** untuk menstandarisasikan pengelolaan asset.
   '
   servers:
-    - url: "http://localhost:8000"
+    - url: "http://localhost:8001"
       description: "localhost"
-    - url: "http://127.0.0.1:8000"
+    - url: "http://127.0.0.1:8001"
       description: "local"
 
 allowed_hosts:
@@ -33,23 +33,23 @@ allow_methods:
 database:
   development:
     host: "localhost"
-    port: 5432
+    port: 5433
     username: "postgres"
-    password: "mysecretpassword"
-    db: "example1"
+    password: "112233"
+    db: "postgres"
     schema: "public"
   staging:
     host: "localhost"
-    port: 5432
+    port: 5433
     username: "postgres"
-    password: "example"
+    password: "112233"
     db: "postgres"
     schema: "public"
   production:
     host: "localhost"
-    port: 5432
+    port: 5433
     username: "postgres"
-    password: "example"
+    password: "112233"
     db: "postgres"
     schema: "public"
 
