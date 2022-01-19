@@ -33,9 +33,9 @@ allow_methods:
 database:
   development:
     host: "localhost"
-    port: 5433
+    port: 5432
     username: "postgres"
-    password: "somePassword"
+    password: "postgres"
     db: "postgres"
     schema: "public"
   staging:
