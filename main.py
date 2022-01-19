@@ -63,17 +63,20 @@ app.include_router(
 app.include_router(
     ArisRouter.router,
     tags=["Aris"],
+    prefix="/aris",
     dependencies=[Depends(verify_token)]
 )
 
 app.include_router(
     AdetRouter.router,
     tags=["Adet"],
+    prefix="/adet",
     dependencies=[Depends(verify_token)]
 )
 
 app.include_router(
     LoanRouterFelix.router,
     tags=["Felix"],
+    prefix="/felix",
     dependencies=[Depends(verify_token)]
 )
