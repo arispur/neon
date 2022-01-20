@@ -42,14 +42,14 @@ database:
     host: "localhost"
     port: 5433
     username: "postgres"
-    password: "112233"
+    password: "somePassword"
     db: "postgres"
     schema: "public"
   production:
     host: "localhost"
     port: 5433
     username: "postgres"
-    password: "112233"
+    password: "somePassword"
     db: "postgres"
     schema: "public"
 

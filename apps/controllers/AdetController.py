@@ -10,7 +10,7 @@ SALT = PARAMS.SALT.salt
 
 class ControllerAdet(object):
     @classmethod
-    def get_loan_by_cif_created_by_adet(cls, input_data=None):
+    def get_loan_by_cif(cls, input_data=None):
         input_data = RequestCIF(**input_data)
         result = BaseResponse()
         result.status = 400
@@ -35,7 +35,7 @@ class ControllerAdet(object):
         return result
 
     @classmethod
-    def get_loan_by_cif_debug_created_by_adet(cls, input_data=None):
+    def get_loan_by_cif_debug(cls, input_data=None):
         input_data = RequestCIF(**input_data)
         result = BaseResponse()
         result.status = 400
