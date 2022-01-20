@@ -67,3 +67,9 @@ async def delete_loan(response: Response, id: int):
     result = aris.delete_loan(id)
     response.status_code = result.status
     return result
+
+@router.get("/loan_by_borrower/{id}")
+async def show_borrower(response: Response, id: int):
+    result = aris.show_loan_in_borrower(id)
+    response.status_code = result.status
+    return result

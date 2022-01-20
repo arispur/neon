@@ -1,11 +1,12 @@
 from apps.models import Model
-# from apps.models.Borrower import Borrower
+# from apps.models.BorrowerModel import Borrower
 # from orator.orm import belongs_to
 from . import db
 
 class NewLoan(Model):
     __table__ = 'loan'
     __primary_key__ = 'loanid'
+    __timestamps__ = False
 
     # @belongs_to
     # def borrower(self):
