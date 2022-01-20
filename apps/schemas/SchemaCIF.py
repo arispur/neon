@@ -7,6 +7,8 @@ from typing import Optional, List
 class RequestCIF(BaseModel):
     cif: str = None
 
+class BorrowerData(BaseModel):
+    idno: str = None
 
 class CIF(BaseModel):
     loanid: str = None
@@ -14,6 +16,7 @@ class CIF(BaseModel):
     loan_amount: int = None
     loan_tenure: int = None
     interest: int = None
+    loan_status: int = None
     cif: str = None
     idno: int = None
     fname: str = None
@@ -29,6 +32,7 @@ class CIF(BaseModel):
     createdate: Timestamp = None
     updatedate: Timestamp = None
     source: str = None
+
 
 
 class ResponseCIF(BaseModel):
