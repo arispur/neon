@@ -5,6 +5,8 @@ from apps.schemas.SchemaLoan import RequestLoan, ResponseLoan, CreateLoan, EditL
 from apps.helper.ConfigHelper import encoder_app
 from main import PARAMS
 from apps.models.NewLoanModel import NewLoan
+from apps.models.BorrowerModel import Borrower
+from apps.models import db
 SALT = PARAMS.SALT.salt
 
 class ControllerAris(object):
@@ -75,7 +77,7 @@ class ControllerAris(object):
         result = BaseResponse()
         result.status = 400
         try:
-            data = NewLoan.limit(10).get().serialize()
+            data = NewLoan.paginate(15, 2).serialize()
             result.status = 200
             result.message = "Success"
             result.data = ResponseLoan(**{"loan_list": data})
@@ -95,22 +97,11 @@ class ControllerAris(object):
         result.status = 400
 
         try:
-            loan = NewLoan()
 
-            loan.loanid = input_loan.loanid,
-            loan.loan_type = input_loan.loan_type,
-            loan.loan_status = input_loan.loan_status,
-            loan.loan_amount = input_loan.loan_amount,
-            loan.loan_tenure = input_loan.loan_tenure,
-            loan.interest = input_loan.interest,
-            loan.cif = input_loan.cif
-
-            loan.save()
-
-            # NewLoan.store_loans(input_loan)
-
-            result.status = 200
-            result.message = "Success"
+            with db.transaction():
+                if NewLoan.insert_loan(input_loan):
+                    result.status = 200
+                    result.message = "Success Input Loan"
 
         except Exception as e:
             Log.error(e)
@@ -126,21 +117,10 @@ class ControllerAris(object):
         result.status = 400
 
         try:
-            loan = NewLoan.find(id)
-
-            loan.loan_type = input_loan.loan_type,
-            loan.loan_status = input_loan.loan_status,
-            loan.loan_amount = input_loan.loan_amount,
-            loan.loan_tenure = input_loan.loan_tenure,
-            loan.interest = input_loan.interest,
-            loan.cif = input_loan.cif
-
-            loan.save()
-
-            # NewLoan.store_loans(input_loan)
-
-            result.status = 200
-            result.message = "Success"
+            with db.transaction():
+                if NewLoan.update_loan(id, input_loan):
+                    result.status = 200
+                    result.message = "Success Edit Loan ID: " + str(id)
 
         except Exception as e:
             Log.error(e)
@@ -185,12 +165,34 @@ class ControllerAris(object):
         result.status = 400
 
         try:
-            if id is not None:
-                loan = NewLoan.find(id)
-                loan.delete()
+            if NewLoan.delete_loan(id):
                 result.status = 200
-                result.message = "Success"
+                result.message = "Success Delete Loan ID: " + str(id)
+        except Exception as e:
+            Log.error(e)
+            result.status = 400
+            result.message = str(e)
 
+        return result
+
+    @classmethod
+    def show_loan_in_borrower(cls, id: int):
+        result = BaseResponse()
+        result.status = 400
+
+        try:
+            if id is not None:
+                data = Borrower.find(id).loan.serialize()
+                if not data:
+                    e = "loan not found!"
+                    Log.error(e)
+                    result.status = 404
+                    result.message = str(e)
+                else:
+                    result.status = 200
+                    result.message = "Success"
+                    result.data = ResponseLoan(**{"loan_list": data})
+                    Log.info(result.message)
             else:
                 e = "loan not found!"
                 Log.error(e)
