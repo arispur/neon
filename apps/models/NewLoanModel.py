@@ -4,7 +4,7 @@ from apps.models import Model
 from . import db
 
 class NewLoan(Model):
-    __table__ = 'loan'
+    __table__ = 'neondataset'
     __primary_key__ = 'loanid'
 
     # @belongs_to

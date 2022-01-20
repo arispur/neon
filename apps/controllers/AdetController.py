@@ -1,6 +1,7 @@
 from apps.helper import Log
 from apps.schemas import BaseResponse
 from apps.schemas.SchemaCIF import RequestCIF, ResponseCIF
+from apps.schemas.SchemaAdet import RequestLoan, ResponseLoan, CreateLoan, EditLoan
 from apps.helper.ConfigHelper import encoder_app
 from main import PARAMS
 from apps.models.AdetModel import Adet
@@ -49,6 +50,36 @@ class ControllerAdet(object):
                 Log.info(result.message)
             else:
                 e = "cif not found!"
+                Log.error(e)
+                result.status = 404
+                result.message = str(e)
+        except Exception as e:
+            Log.error(e)
+            result.status = 400
+            result.message = str(e)
+    
+        return result
+
+    @classmethod
+    def show_cif(cls, id: int):
+        result = BaseResponse()
+        result.status = 400
+
+        try:
+            if id is not None:
+                data = Adet.where('cif', '=', id).get().serialize()
+                if not data:
+                    e = "cif data not found!"
+                    Log.error(e)
+                    result.status = 404
+                    result.message = str(e)
+                else:
+                    result.status = 200
+                    result.message = "Success"
+                    result.data = ResponseLoan(**{"loan_list": data})
+                    Log.info(result.message)
+            else:
+                e = "cif data not found!"
                 Log.error(e)
                 result.status = 404
                 result.message = str(e)
