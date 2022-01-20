@@ -1,6 +1,4 @@
 from apps.models import Model
-# from apps.models.BorrowerModel import Borrower
-# from orator.orm import belongs_to
 from . import db
 
 class NewLoan(Model):
@@ -8,9 +6,11 @@ class NewLoan(Model):
     __primary_key__ = 'loanid'
     __timestamps__ = False
 
-    # @belongs_to
-    # def borrower(self):
-    #     return Borrower
+    def insert_loan(data = None):
+        return db.table('loan').insert(data)
 
-    # def get_loans(db: Session, skip: int = 0, limit: int = 100):
-    #     return db.query(models.Loan).offset(skip).limit(limit).all()
+    def update_loan(id, data = None):
+        return db.table('loan').where('loanid', '=', id).update(data)
+
+    def delete_loan(id):
+        return db.table('loan').where('loanid', '=', id).delete()

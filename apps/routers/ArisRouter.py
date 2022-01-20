@@ -57,7 +57,7 @@ async def show_loan(response: Response, id: int):
     return result
 
 @router.put("/loan/{id}")
-async def show_loan(response: Response, id: int, input_data=Body(..., example=example_edit_loan)):
+async def edit_loan(response: Response, id: int, input_data=Body(..., example=example_edit_loan)):
     result = aris.edit_loan(id, input_data=input_data)
     response.status_code = result.status
     return result
@@ -68,7 +68,7 @@ async def delete_loan(response: Response, id: int):
     response.status_code = result.status
     return result
 
-@router.get("/loan_by_borrower/{id}")
+@router.get("/loan_by_borrower_cif/{id}")
 async def show_borrower(response: Response, id: int):
     result = aris.show_loan_in_borrower(id)
     response.status_code = result.status
