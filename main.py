@@ -1,3 +1,4 @@
+from sys import prefix
 from fastapi import FastAPI, Depends, HTTPException, Security, status
 from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
@@ -75,5 +76,6 @@ app.include_router(
 app.include_router(
     LoanRouterFelix.router,
     tags=["Felix"],
+    prefix="/felix",
     dependencies=[Depends(verify_token)]
 )
