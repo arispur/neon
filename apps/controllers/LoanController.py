@@ -1,6 +1,5 @@
 from optparse import Values
 from unicodedata import name
-from numpy import where
 from apps.helper import Log
 from apps.schemas import BaseResponse
 from apps.schemas.SchemaCIF import CIF, BorrowerData, RequestCIF, ResponseCIF

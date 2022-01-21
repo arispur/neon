@@ -37,3 +37,20 @@ class CIF(BaseModel):
 
 class ResponseCIF(BaseModel):
     cif_list: List[CIF]
+
+class borrowbase(BaseModel):
+    cif: str = None
+    idno: int = None
+    fname: str = None
+    lname: str = None
+    gender: str = None
+    marital_status: str = None
+    income: str = None
+    phone: str = None
+
+class borrow(borrowbase):
+    class Config:
+        orm_mode = True
+
+class ResponseBOR(BaseModel):
+    bor_list: List[borrow]
