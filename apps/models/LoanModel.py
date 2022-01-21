@@ -1,6 +1,12 @@
 from apps.models import Model
 from . import db
 
+
+class LoanFelix(Model):
+    __table__ = 'neondataset'
+    __primary_key__ = 'cif'
+    __timestamps__ = False
+
 class Loan(Model):
     __table__ = 'neondataset2'
     __primary_key__ = 'idno'
