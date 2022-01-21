@@ -2,7 +2,7 @@ from apps.models import Model
 from . import db
 
 class NewLoan(Model):
-    __table__ = 'loan'
+    __table__ = 'neondataset'
     __primary_key__ = 'loanid'
     __timestamps__ = False
 
